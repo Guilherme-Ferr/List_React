@@ -1,15 +1,18 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function ToDoList() {
-  const [taskList, setTaskList] = useState([
-    {
-      id: 1,
-      description: "Estudar React",
-    },
-  ]);
+  const [taskList, setTaskList] = useState([]);
 
   const [inputTask, setInputTask] = useState({ id: "", description: "" });
+
+  window.addEventListener("beforeunload", () => {
+    localStorage.setItem("lista", JSON.stringify(taskList));
+  });
+
+  useEffect(() => {
+    setTaskList(JSON.parse(localStorage.getItem("lista")) || []);
+  }, []);
 
   const handleInsert = (description) => {
     const newId =
@@ -92,6 +95,7 @@ function List({ list, handleRemove, handleEdit }) {
       {list.length === 0 && "Você não tem tarefas"}
       {list.map((item, index) => (
         <Item
+          key={item.id}
           task={item}
           index={index}
           handleEdit={handleEdit}
