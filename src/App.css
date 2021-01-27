@@ -1,5 +1,6 @@
 .container {
   width: 30%;
+  min-width: 350px;
 }
 .form {
   display: flex;
@@ -29,13 +30,13 @@
   font-weight: bold;
   margin-left: 10px;
 }
-.item > span {
+.item > div > span {
   font-size: 30px;
   font-weight: bold;
   margin-right: 10px;
   cursor: pointer;
   transform: 0.2s;
 }
-.item > span:hover {
+.item > div > span:hover {
   color: red;
 }
